@@ -21,58 +21,7 @@ dirc = path+filename
 book = load_workbook(dirc)
 sheet = book["Sheet1"]
 
-#提取疾病部位
 
-#遍历数据行
-for row in range(2,sheet.max_row+1):
-    #获取改行疾病名称
-    name = "瘤"
-    #获取诊断内容，分行，存为list
-    diagonse = sheet.cell(row=row,column=5).value.split("\n")
-    #获取描述内容，分行，存为list
-    describe = sheet.cell(row=row,column=4).value.split("\n")
-    #初始化提取后的描述和诊断
-    p_describe=""
-    p_diagnose=""
-    
-    #遍历诊断list
-    for x in diagonse:
-        #若该内容中出现目标疾病名称
-        if name in x:
-            #存为提取后的诊断
-            p_diagnose = x
-            break #跳出循环
-        else:
-            pass
-        
-    #对该诊断进行分词
-    result = pseg.cut(p_diagnose)
-    #遍历分词后的结果
-    for w in result:
-        #若该词的词性为jp
-        if w.flag=="jp":
-            print("row:",row,w.word,"\\",w.flag)   #打印该词\词性
-            #遍历描述list
-            for des in describe:
-                #若该解剖部位存在
-                if w.word in des:
-                    #存为提取后的描述
-                    p_describe = des
-                    break #跳出循环
-                else:
-                    pass
-            #若描述中未找到目标部位，则将全部文本存入提取后的描述
-            if p_describe =="":
-                p_describe = "\n".join(describe)
-            break
-        #若未找到含词性为jp词语的语句，则跳过
-        else:
-            pass
-    #将结果保存至excel中
-    sheet.cell(row=row,column=6).value = p_describe
-    sheet.cell(row=row,column=7).value = p_diagnose
-    sheet.cell(row=row,column=8).value = w.word #部位
-    
     
 #提取信号
 '''
