@@ -14,6 +14,7 @@
 增强扫描 zqsm
 強化 zqsm
 强化 zqsm
+不 czxf
 未见 czxf
 未 czxf
 无 czxf
@@ -61,6 +62,7 @@
 大脑镰 jp
 桥脑 jp
 脑桥 jp
+海绵窦 jp
 丘脑 jp
 延髓 jp
 额部 jp
@@ -87,7 +89,6 @@
 颅窝 jp
 枕部 jp
 脑膜 jp
-基底 jp
 额岛叶 jp
 额颞叶 jp
 顶枕叶 jp
@@ -111,6 +112,8 @@
 侧脑室 1 jp
 第二脑室 jp
 第三脑室 jp
+脑实质 jp
+大脑皮层 jp
 第四脑室 jp
 第1脑室 jp
 第2脑室 jp
@@ -136,6 +139,7 @@ T1 xhmc
 T1WI xhmc
 T2 xhmc
 T2WI xhmc
+T2FLAIR 120 xhmc
 FLAIR 100 xhmc
 ADC xhmc
 SWI xhmc
@@ -153,10 +157,16 @@ DWI xhmc
 偏高 xhqd
 等偏低 xhqd
 等偏高 xhqd
+等高 xhqd
+等低 xhqd
 等 xhqd
 混杂 xhqd
+混杂低 xhqd
+混杂高 xhqd
+高低混杂 xhqd
 均匀 xhxr
 不均匀 xhxr
+欠均匀 xhxr
 圆形 xhxz
 卵圆形 xhxz
 楔形 xhxz
@@ -168,10 +178,12 @@ DWI xhmc
 结节样 xhxz
 斑点状 xhxz
 团片状 xhxz
+分叶状 xhxz
 新月状 xhxz
 小片状 xhxz
 小条状 xhxz
 片状 xhxz
+不规则状 xhxz
 团块状 xhxz
 大片状 xhxz
 带状 xhxz
@@ -189,7 +201,9 @@ DWI xhmc
 月牙形 xhxz
 分隔 xhxz
 水样 xhxz
+累及 blgx
 及 blgx
 和 blgx
 与 blgx
 或 blgx
+脑膜尾征 zz
