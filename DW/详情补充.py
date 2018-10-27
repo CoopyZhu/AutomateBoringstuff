@@ -6,6 +6,7 @@ Created on Fri Oct 26 19:57:54 2018
 """
 
 from openpyxl import load_workbook
+import re
 
 
 file_dir = r"C:/Users/朱诚锐/OneDrive/DEEPWISE/问诊平台/数据/"
@@ -18,6 +19,8 @@ sheet = wkb.active
 
 for row in range(2,sheet.max_row+1):
     content = sheet.cell(row=row,column=2).value
+    content = content.strip("\n")
+    content = re.sub(r"\n\n+","\n",content)
     content = content.split("\n")
     now_col = 3
     con=""
@@ -27,7 +30,7 @@ for row in range(2,sheet.max_row+1):
             con = ""
             
             now_col +=1
-            sheet.cell(row=row,column=now_col).value = c
+            con = con + c +"\n"
             now_col +=1
         else:
             con= con +c+"\n"
