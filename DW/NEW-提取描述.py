@@ -134,10 +134,7 @@ class ParsedContent:
                     sentence.add(word)
                     w_idx += 1
                 self.sentences.append(sentence)
-                s_idx +=1
-
-
-            
+                s_idx +=1      
     
 class ParsedDiagnosis:
     def __init__(self,raw_diagnosis):
@@ -158,9 +155,10 @@ class ParsedDiagnosis:
                 for w in result:
                         if w.flag == "jp":
                             WriteToCell(write_to_cell,w.word,"、")
+                            
+                            
 '''
 TODO：单位句子中存在两个及以上信号名称如何处理，难点-长T1，T1低信号，顺序问题
-TODO：
 '''
 
     
