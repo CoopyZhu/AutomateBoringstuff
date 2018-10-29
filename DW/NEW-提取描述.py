@@ -159,7 +159,8 @@ class ParsedDiagnosis:
                         if w.flag == "jp":
                             WriteToCell(write_to_cell,w.word,"、")
 '''
-czxf[....]增强
+TODO：单位句子中存在两个及以上信号名称如何处理，难点-长T1，T1低信号，顺序问题
+TODO：
 '''
 
     
@@ -167,19 +168,23 @@ def main():
     path = r"C:\Users\朱诚锐\OneDrive\DEEPWISE\问诊平台\数据\征象提取"
     #文件名
     filename = r"\1022-颅内海绵状血管瘤.xlsx"
+    #输出文件名
+    out_filename = r"\1022处理后.xlsx"
     dirc = path+filename
-    
+
     book = load_workbook(dirc)
     sheet = book["Sheet1"]
-    content_col=13
-    raw_content_col = 5
+    
+    #初始化信号位置
+    content_col=13 #空白列，作为存储提取描述内容的容器
+    raw_content_col = 5 #原始诊断内容
     diagnosis_col = 6
     jp_col = 14
     xhxz_col = 28
     zqsm_col = 20
     zqsmlx_col = 21
     zw_col = 31
-    disease="海绵"
+    disease="海绵" #疾病关键字
     T1_col = 16
     T2_col=17
     Flair_col=18
@@ -187,9 +192,10 @@ def main():
     SWI_col = 24
     df_col = 15
     ADC_col = 23
+    
     #遍历数据行,
     for row in range(2,sheet.max_row+1):
-        
+        #加载目标单元格
         diagnosis_cell = sheet.cell(row=row,column=diagnosis_col)
         content_cell = sheet.cell(row=row,column=content_col)
         raw_content = sheet.cell(row=row,column=raw_content_col).value
@@ -207,9 +213,8 @@ def main():
         ADC_cell = sheet.cell(row=row,column=ADC_col)
         print("row:{}\nraw_content:{}\n{}".format(row,raw_content,"+"*30))
         
-        #根据诊断内容将发病位置提出
         
-        #处理诊断内容所在的单元格内容
+        #处理诊断，
         diagnosis = ParsedDiagnosis(diagnosis_cell.value)
         #识别疾病所在的诊断内容，提取解剖位置，写入jp_cell
         diagnosis.parse_jp(disease,jp_cell)
@@ -219,8 +224,7 @@ def main():
         diagnosis.if_occupied(disease,df_cell,"多发")
         
         
-        #将疾病部位所在的段落提取出
-        
+        #处理描述，将疾病部位所在的段落提取出
         try:
             jp = jp_cell.value.split("、")
             print("jp:",jp)
@@ -290,6 +294,6 @@ def main():
                 
         print("\n")
     #保存
-    book.save(path+r"\1022处理后.xlsx")
+    book.save(path+out_filename)
     print("\nfinished")
 main()
