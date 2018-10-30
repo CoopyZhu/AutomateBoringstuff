@@ -7,7 +7,6 @@ Created on Thu Oct 25 15:09:20 2018
 
 import scrapy
 from mingyan2.items import Mingyan2Item
-import re
 
 class mingyantags(scrapy.Spider):
     name= 'mingyantag'
