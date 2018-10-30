@@ -10,31 +10,28 @@ from scrapy.http import HtmlResponse
 from selenium.webdriver.chrome.options import Options
 import time
 
-#滚动至页面底部的js
 js="""
-function scrollToBottom() {
+//适用于百度搜索结果页的窗体滚动，2018-1030
+function scrollToBottom(){  
+        interval = 1000; //移动间隔
+        delta = 200; //每次移动的距离
+        var scroll = function(){ //滚动函数
+        var TextTop = document.body.clientHeight // 文本高度
+        var docscrollTop = document.documentElement.scrollTop; //目前元素窗口位置
+        var clientHeight = document.documentElement.clientHeight; //窗高
+            window.scrollTo(0,docscrollTop+delta); //滚动
+            };
+        var timer = setInterval(function(){ //间隔函数
+        var docscrollTop = document.documentElement.scrollTop; //目前元素窗口位置
+        var clientHeight = document.documentElement.clientHeight; //窗高
+        var curScrollTop= clientHeight + docscrollTop; //目前实际位置 = 窗高+元素窗口位置
+        if(curScrollTop>=TextTop){clearInterval(timer)} //若实际位置等于文本最大高度，清除间隔函数
+        else{scroll()}},interval)
+            }
+     scrollToBottom()
 
-    var Height = document.body.clientHeight,  //文本高度
-        screenHeight = window.innerHeight,  //屏幕高度
-        INTERVAL = 100,  // 滚动动作之间的间隔时间
-        delta = 500,  //每次滚动距离
-        curScrollTop = 0;    //当前window.scrollTop 值
-
-    var scroll = function () {
-        curScrollTop = document.body.scrollTop;
-        window.scrollTo(0,curScrollTop + delta);
-    };
-
-    var timer = setInterval(function () {
-        var curHeight = curScrollTop + screenHeight;
-        if (curHeight >= Height){   //滚动到页面底部时，结束滚动
-            clearInterval(timer);
-        }
-        scroll();
-    }, INTERVAL)
-}
-    scrollToBottom
 """
+
 class JavaScriptMiddleware(object):
     def process_request(self, request,spider):
         if spider.name: #判断spider的名字
@@ -46,7 +43,7 @@ class JavaScriptMiddleware(object):
             driver = webdriver.Chrome(executable_path=driver_path,chrome_options=chrome_options)
             driver.get(request.url)
             time.sleep(1)
-            driver.excute_script(js) #可执行js，模仿用户操作，该实例为将页面拉至最底端
+            driver.execute_script(js) #可执行js，模仿用户操作，该实例为将页面拉至最底端
             time.sleep(3)#等待执行JS
             # 可使用selenium 自带的wait，参照 https://selenium-python-zh.readthedocs.io/en/latest/waits.html
             body = driver.page_source

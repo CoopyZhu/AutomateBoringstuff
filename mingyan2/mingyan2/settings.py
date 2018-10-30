@@ -52,9 +52,9 @@ ROBOTSTXT_OBEY = False
 
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
-#DOWNLOADER_MIDDLEWARES = {
-#    'mingyan2.middlewares.Mingyan2DownloaderMiddleware': 543,
-#}
+DOWNLOADER_MIDDLEWARES = {
+    'mingyan2.middlewares.HeadlessChromeMiddleware': 100,
+}
 
 # Enable or disable extensions
 # See https://doc.scrapy.org/en/latest/topics/extensions.html
