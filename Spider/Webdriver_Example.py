@@ -43,7 +43,7 @@ class JavaScriptMiddleware(object):
             driver = webdriver.Chrome(executable_path=driver_path,chrome_options=chrome_options)
             driver.get(request.url)
             time.sleep(1)
-            driver.execute_script(js) #可执行js，模仿用户操作，该实例为将页面拉至最底端
+            #driver.execute_script(js) #可执行js，模仿用户操作，该实例为将页面拉至最底端
             time.sleep(3)#等待执行JS
             # 可使用selenium 自带的wait，参照 https://selenium-python-zh.readthedocs.io/en/latest/waits.html
             body = driver.page_source
