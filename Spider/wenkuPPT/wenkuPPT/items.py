@@ -13,5 +13,4 @@ class WenkupptItem(scrapy.Item):
     # name = scrapy.Field()
     docTittle = scrapy.Field()
     img_urls = scrapy.Field()
-    img_hidden_urls= scrapy.Field()
     pass
