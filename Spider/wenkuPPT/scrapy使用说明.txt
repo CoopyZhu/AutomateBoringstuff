@@ -1,0 +1,23 @@
+依赖的库：
+scrapy
+selenium
+urllib
+
+将middleware文件中的
+driver_path
+设置为chromedriver.exe的路径
+
+打开cmd，
+cd 
+[scrapy.cfg]所在的根目录
+
+爬虫启动命令
+scrapy crawl downloadppt -s JOBDIR=job_process/001
+#可使用ctrl+c暂停，重启命令相同
+
+scrapy crawl downloadppt
+#单纯启动
+
+启动后会提示输入需要搜索的关键词
+
+爬取的文件会保存在爬虫目录下

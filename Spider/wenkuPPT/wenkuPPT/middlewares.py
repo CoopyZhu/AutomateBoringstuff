@@ -18,7 +18,7 @@ class JavaScriptMiddleware(object):
             print("Headless Chrome is starting....")
             chrome_options = Options()
             chrome_options.add_argument('--headless')
-            driver_path=r"C:\Program Files (x86)\Google\Chrome\Application\chromedriver.exe"
+            driver_path=r".\chromedriver.exe"
             #driver = webdriver.Chrome(executable_path=driver_path)
             driver = webdriver.Chrome(executable_path=driver_path,chrome_options=chrome_options)
             driver.get(request.url)
